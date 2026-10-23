@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Itzfizz Digital — We Build Brands That Belong Online</title>
+  <meta name="description" content="Itzfizz Digital is India's leading digital agency for UI/UX Design, Web Development, SEO, Branding, and Social Media Marketing." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+  <div id="scroll-progress" role="progressbar" aria-label="Scroll progress"></div>
+
+  <!-- NAV -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-logo">itz<span>fizz</span></div>
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta" type="button">Start a Project</button>
+  </nav>
+
+  <main>
+    <!-- HERO WRAPPER -->
+    <section id="hero-wrapper" aria-label="Hero animation">
+      <div id="hero-sticky">
+
+        <!-- Grid -->
+        <div class="grid-lines" id="grid-lines" aria-hidden="true">
+          <div class="grid-line-v" style="left:16.66%"></div>
+          <div class="grid-line-v" style="left:33.33%"></div>
+          <div class="grid-line-v" style="left:50%"></div>
+          <div class="grid-line-v" style="left:66.66%"></div>
+          <div class="grid-line-v" style="left:83.33%"></div>
+          <div class="grid-line-h" style="top:25%"></div>
+          <div class="grid-line-h" style="top:50%"></div>
+          <div class="grid-line-h" style="top:75%"></div>
+        </div>
+
+        <!-- Corner marks -->
+        <div class="corner-mark cm-tl" aria-hidden="true"></div>
+        <div class="corner-mark cm-tr" aria-hidden="true"></div>
+        <div class="corner-mark cm-bl" aria-hidden="true"></div>
+        <div class="corner-mark cm-br" aria-hidden="true"></div>
+
+        <!-- Particle canvas -->
+        <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+        <!-- Ambient glow -->
+        <div id="ambient-glow" aria-hidden="true"></div>
+
+        <!-- STAGE 1: Aperture -->
+        <div id="signal-stage" aria-hidden="true">
+          <div id="main-visual">
+            <div class="aperture-ring ring-1"></div>
+            <div class="aperture-ring ring-2"></div>
+            <div class="aperture-ring ring-3"></div>
+            <div class="aperture-ring ring-4"></div>
+            <div id="brand-mark">
+              <svg id="mark-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="rgba(157,255,32,0.25)" stroke-width="0.8"/>
+                <polygon points="50,16 82,33 82,67 50,84 18,67 18,33" fill="none" stroke="rgba(157,255,32,0.45)" stroke-width="0.8"/>
+                <polygon points="50,28 70,39 70,61 50,72 30,61 30,39" fill="rgba(157,255,32,0.06)" stroke="rgba(157,255,32,0.7)" stroke-width="1"/>
+                <line x1="38" y1="38" x2="38" y2="62" stroke="#9DFF20" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="38" y1="38" x2="58" y2="38" stroke="#9DFF20" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="38" y1="50" x2="54" y2="50" stroke="#9DFF20" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="63" cy="57" r="3" fill="#9DFF20"/>
+                <line x1="20" y1="80" x2="80" y2="20" stroke="rgba(157,255,32,0.15)" stroke-width="0.5" stroke-dasharray="3,5"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- STAGE 2: Wordmark -->
+        <div id="stage-wordmark" aria-label="Itzfizz wordmark">
+          <div class="wordmark-text">itz<em>fizz</em></div>
+          <div class="wordmark-sub">Digital · Branding · Experience</div>
+        </div>
+
+        <!-- STAGE 3: Services constellation -->
+        <div id="stage-services" aria-hidden="true"></div>
+
+        <!-- STAGE 4: Interface mockup -->
+        <div id="stage-interface" aria-label="Website interface preview">
+          <div class="interface-frame" id="interface-frame">
+            <div class="if-browser-bar">
+              <div class="if-dot"></div>
+              <div class="if-dot"></div>
+              <div class="if-dot"></div>
+              <div class="if-url-bar"><span>itzfizz</span>.com</div>
+            </div>
+            <div class="if-content">
+              <div class="if-nav-row">
+                <div class="if-logo">itz<span>fizz</span></div>
+                <div class="if-nav-items">
+                  <div class="if-nav-item"></div>
+                  <div class="if-nav-item"></div>
+                  <div class="if-nav-item"></div>
+                  <div class="if-nav-item"></div>
+                </div>
+              </div>
+              <div class="if-hero-area">
+                <div class="if-hero-text">
+                  <div class="if-h1"></div>
+                  <div class="if-h1-line2"></div>
+                  <div class="if-body-line" style="width:95%"></div>
+                  <div class="if-body-line" style="width:80%"></div>
+                  <div class="if-body-line" style="width:60%"></div>
+                  <div class="if-cta"></div>
+                </div>
+                <div class="if-hero-visual">
+                  <div class="if-visual-inner">
+                    <div class="if-visual-core"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="if-stats-row">
+                <div class="if-stat-card"><div class="if-stat-num"></div><div class="if-stat-label" style="width:70%"></div></div>
+                <div class="if-stat-card"><div class="if-stat-num" style="width:55%"></div><div class="if-stat-label" style="width:80%"></div></div>
+                <div class="if-stat-card"><div class="if-stat-num" style="width:45%"></div><div class="if-stat-label" style="width:65%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HUD Text Layer -->
+        <div id="hero-text-layer" aria-hidden="true">
+          <div id="welcome-label">
+            <div class="welcome-eyebrow">Welcome — Itzfizz</div>
+            <h1 class="welcome-headline">We build brands<br>that belong<br><strong>online.</strong></h1>
+            <p class="welcome-tagline">India's digital agency for brands that mean something.</p>
+          </div>
+          <div id="stats-block">
+            <div class="stat-item">
+              <div class="stat-number">150<span>+</span></div>
+              <div class="stat-desc">Projects Delivered</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">5<span>+</span></div>
+              <div class="stat-desc">Years Active</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">3<span>×</span></div>
+              <div class="stat-desc">Avg. Traffic Growth</div>
+            </div>
+          </div>
+          <div id="right-descriptors">
+            <div class="descriptor-item">
+              <div class="descriptor-tag">01 — Identity</div>
+              <div class="descriptor-text">Brand systems that are distinctive across every surface.</div>
+            </div>
+            <div class="descriptor-item">
+              <div class="descriptor-tag">02 — Digital</div>
+              <div class="descriptor-text">UI/UX and web development built for real users.</div>
+            </div>
+            <div class="descriptor-item">
+              <div class="descriptor-tag">03 — Reach</div>
+              <div class="descriptor-text">SEO and social content engineered to grow audiences.</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="scroll-cue" aria-label="Scroll to explore">
+          <div class="scroll-cue-text">Scroll</div>
+          <div class="scroll-cue-line"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div id="after-hero">
+        <div class="section-eyebrow">What We Do</div>
+        <h2 class="section-title">Every dimension of your<br><strong>digital presence.</strong></h2>
+        <div class="services-grid" id="services-grid">
+          <div class="service-card">
+            <div class="service-card-num">01</div>
+            <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="18" cy="18" r="10" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <circle cx="18" cy="18" r="5" fill="rgba(157,255,32,0.15)" stroke="#9DFF20" stroke-width="1.5"/>
+              <line x1="18" y1="4" x2="18" y2="8" stroke="#9DFF20" stroke-width="1" opacity="0.4"/>
+              <line x1="18" y1="28" x2="18" y2="32" stroke="#9DFF20" stroke-width="1" opacity="0.4"/>
+              <line x1="4" y1="18" x2="8" y2="18" stroke="#9DFF20" stroke-width="1" opacity="0.4"/>
+              <line x1="28" y1="18" x2="32" y2="18" stroke="#9DFF20" stroke-width="1" opacity="0.4"/>
+            </svg>
+            <div class="service-card-title">Brand Identity</div>
+            <p class="service-card-desc">Logos, design systems, and visual identities that differentiate and endure across all touchpoints.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-num">02</div>
+            <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="4" y="8" width="28" height="20" rx="2" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <rect x="8" y="12" width="10" height="8" rx="1" fill="rgba(157,255,32,0.1)" stroke="#9DFF20" stroke-width="1"/>
+              <line x1="22" y1="14" x2="28" y2="14" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <line x1="22" y1="17" x2="26" y2="17" stroke="#9DFF20" stroke-width="1" opacity="0.3"/>
+            </svg>
+            <div class="service-card-title">UI/UX Design</div>
+            <p class="service-card-desc">Interfaces that convert visitors into clients. Grounded in user research, built for clarity and action.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-num">03</div>
+            <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polyline points="4,24 10,16 16,20 22,10 28,14 32,8" stroke="#9DFF20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+              <circle cx="32" cy="8" r="2" fill="#9DFF20"/>
+            </svg>
+            <div class="service-card-title">Web Development</div>
+            <p class="service-card-desc">Fast, accessible, and scalable websites engineered for performance and conversion.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-num">04</div>
+            <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="18" cy="18" r="12" stroke="#9DFF20" stroke-width="1" opacity="0.3"/>
+              <path d="M18 6 C18 6 24 12 24 18 C24 24 18 30 18 30 C18 30 12 24 12 18 C12 12 18 6 18 6Z" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <line x1="6" y1="18" x2="30" y2="18" stroke="#9DFF20" stroke-width="0.8" opacity="0.4"/>
+            </svg>
+            <div class="service-card-title">SEO</div>
+            <p class="service-card-desc">Search visibility strategies that bring qualified traffic and compound over time.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-card-num">05</div>
+            <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="6" y="6" width="10" height="10" rx="2" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <rect x="20" y="6" width="10" height="10" rx="2" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <rect x="6" y="20" width="10" height="10" rx="2" stroke="#9DFF20" stroke-width="1" opacity="0.5"/>
+              <rect x="20" y="20" width="10" height="10" rx="2" fill="rgba(157,255,32,0.1)" stroke="#9DFF20" stroke-width="1.2"/>
+            </svg>
+            <div class="service-card-title">Social Media</div>
+            <p class="service-card-desc">Content systems and campaign strategy that build communities and convert attention into revenue.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta-section" aria-labelledby="cta-heading">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <h2 class="cta-title" id="cta-heading">Ready to make<br>your mark <strong>online?</strong></h2>
+      <p class="cta-subtitle">Let's build something worth remembering.</p>
+      <a href="https://itzfizz.com" target="_blank" rel="noopener noreferrer" style="text-decoration:none">
+        <button class="cta-btn" type="button">
+          Start a Project
+          <svg class="cta-btn-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">itz<span>fizz</span> <span style="color:var(--text-muted);font-size:10px;letter-spacing:0.1em">Digital</span></div>
+    <div class="footer-links">
+      <a href="https://itzfizz.com" target="_blank">itzfizz.com</a>
+      <a href="https://www.instagram.com/itzfizz_digital/" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/company/itzfizz/" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-copy">© 2024 Itzfizz Digital. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
